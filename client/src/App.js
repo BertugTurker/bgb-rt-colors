@@ -1,17 +1,22 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Palatte from './compo/Palatte';
-import {init} from './socketApi'
+import {init, subscribe} from './socketApi'
 
 function App() {
+	const [activeColor, setActiveColor] = useState("#282c34");
 
-  useEffect(()=> {
-    init()
-  }, [])
+	useEffect(() => {
+		init();
+
+		subscribe((color) => {
+			setActiveColor(color);
+		});
+	}, []);
 
   return (
-    <div className="App">
-     <Palatte/>
+    <div className="flex justify-center h-screen items-center" style={{ backgroundColor: activeColor }}>
+     <Palatte activeColor={activeColor} />
     </div>
   );
 }

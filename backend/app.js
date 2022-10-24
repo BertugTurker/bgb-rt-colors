@@ -17,7 +17,7 @@ io.on("connection", (socket) => {
 	socket.emit("receive", lastColor);
 
 	socket.on("newColor", (color) => {
-		console.log(color);
+		//console.log(color);
 
 		lastColor = color;
 		io.emit("receive", color);
